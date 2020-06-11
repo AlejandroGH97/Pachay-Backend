@@ -2,9 +2,10 @@ package controller;
 
 
 import business.UserService;
-import data.entities.User;
+import entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import repository.UserRepository;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserService service;
+    UserService service;
 
     @GetMapping
     public List<User> findAll(){
@@ -23,10 +24,5 @@ public class UserController {
     @PostMapping
     User newUser(@RequestBody User newUser){
         return service.save(newUser);
-    }
-
-    @PutMapping("/{id}")
-    public User updateUser(@RequestBody User newUser, @PathVariable String id){
-        return service.update(newUser, id);
     }
 }
