@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -33,15 +34,22 @@ public class AuthenticationController {
 
         User _user = service.findByEmail(user.email);
 
-        if(_user.password.equals(user.password)){
+        UserDetails userDetails = null;
 
-            final UserDetails userDetails = myUserDetailsService.loadUserByUsername(user.email);
+        try{
+            userDetails = this.myUserDetailsService.loadUserByUsername(user.email);
+        }
+        catch (UsernameNotFoundException e){
+            return new ResponseEntity<>("Email inválido.",HttpStatus.BAD_REQUEST);
+        }
+
+        if(_user.password.equals(user.password)){
             final String jwt = jwtTokenUtil.createJwt(userDetails);
             HashMap<String,String> response = new HashMap<>();
             response.put("jwt",jwt);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
 
-        return new ResponseEntity<>("Login inválido", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Password inválido", HttpStatus.BAD_REQUEST);
     }
 }
