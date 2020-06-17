@@ -3,6 +3,7 @@ package entities;
 
 import org.springframework.data.annotation.Id;
 import com.google.common.hash.Hashing;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.nio.charset.StandardCharsets;
@@ -13,6 +14,7 @@ public class User {
     @Id
     public String id;
 
+    @Indexed(unique = true)
     public String email;
 
     public String firstName;
