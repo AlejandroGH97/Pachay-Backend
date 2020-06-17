@@ -47,6 +47,10 @@ public class AuthenticationController {
             final String jwt = jwtTokenUtil.createJwt(userDetails);
             HashMap<String,String> response = new HashMap<>();
             response.put("jwt",jwt);
+            response.put("firstName",_user.firstName);
+            response.put("lastName",_user.lastName);
+            response.put("role",Integer.toString(_user.role));
+            response.put("email",_user.email);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
 
