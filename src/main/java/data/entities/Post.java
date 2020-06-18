@@ -25,6 +25,7 @@ public class Post {
 
     public String author;
 
+    @DBRef
     public List<Topic> topics;
 
     public List<String> videos;
