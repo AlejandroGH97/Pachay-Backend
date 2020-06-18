@@ -1,6 +1,8 @@
 package data.DTO;
 
 import data.entities.Topic;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 
 import java.io.Serializable;
 import java.time.LocalDate;
