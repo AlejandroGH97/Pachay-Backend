@@ -17,7 +17,11 @@ public class PostService {
     private PostRepository postRepository;
 
     public List<Post> findAll(){
-        return postRepository.findAll();
+        List<Post> response = postRepository.findAll();
+        for(Post post: response){
+            post.author.password = null;
+        }
+        return response;
     }
 
     public Post save(Post post){

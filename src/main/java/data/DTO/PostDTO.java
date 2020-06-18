@@ -1,8 +1,10 @@
 package data.DTO;
 
 import data.entities.Topic;
+import data.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -22,7 +24,7 @@ public class PostDTO implements Serializable {
 
     private int ratingCount = 0;
 
-    public String author;
+    public User author;
 
     public List<Topic> topics;
 
@@ -31,14 +33,13 @@ public class PostDTO implements Serializable {
     public PostDTO() {
     }
 
-    public PostDTO(String postId, String title, String description, int rating, LocalDate date, int ratingCount, String author, List<Topic> topics, List<String> videos) {
+    public PostDTO(String postId, String title, String description, int rating, LocalDate date, int ratingCount, List<Topic> topics, List<String> videos) {
         this.postId = postId;
         this.title = title;
         this.description = description;
         this.rating = rating;
         this.date = date;
         this.ratingCount = ratingCount;
-        this.author = author;
         this.topics = topics;
         this.videos = videos;
     }
@@ -91,14 +92,6 @@ public class PostDTO implements Serializable {
         this.ratingCount = ratingCount;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public List<Topic> getTopics() {
         return topics;
     }
@@ -113,5 +106,13 @@ public class PostDTO implements Serializable {
 
     public void setVideos(List<String> videos) {
         this.videos = videos;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

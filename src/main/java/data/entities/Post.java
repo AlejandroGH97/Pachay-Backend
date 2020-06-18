@@ -23,7 +23,8 @@ public class Post {
 
     private int ratingCount = 0;
 
-    public String author;
+    @DBRef
+    public User author;
 
     @DBRef
     public List<Topic> topics;
@@ -65,11 +66,11 @@ public class Post {
         this.date = date;
     }
 
-    public String getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 
