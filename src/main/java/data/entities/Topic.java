@@ -1,4 +1,4 @@
-package entities;
+package data.entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -10,7 +10,7 @@ public class Topic {
     @Id
     public String id;
 
-    @Indexed(unique = true)
+    @Indexed(unique = true, sparse = true)
     public String topic;
 
     public Topic() {

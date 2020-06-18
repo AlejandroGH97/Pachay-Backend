@@ -21,7 +21,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        entities.User user = userService.findByEmail(email);
+        data.entities.User user = userService.findByEmail(email);
         if( user != null){
             return new User(user.email, user.password, new ArrayList<>());
         }

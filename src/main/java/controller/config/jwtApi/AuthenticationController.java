@@ -2,7 +2,7 @@ package controller.config.jwtApi;
 
 import business.UserService;
 import controller.config.util.JwtTokenUtil;
-import entities.User;
+import data.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

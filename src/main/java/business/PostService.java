@@ -1,8 +1,9 @@
 package business;
 
 
-import entities.Post;
-import entities.Topic;
+import data.DTO.PostDTO;
+import data.entities.Post;
+import data.entities.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.PostRepository;
@@ -25,5 +26,20 @@ public class PostService {
 
     public List<Post> findByTopicsTopic(Topic topic){
         return postRepository.findByTopicsTopic(topic);
+    }
+
+    public Post create(PostDTO _post){
+        Post post = new Post();
+
+        post.setAuthor(_post.getAuthor());
+        post.setDate(_post.getDate());
+        post.setDescription(_post.getDescription());
+        post.setRating(0);
+        post.setRatingCount(0);
+        post.setTitle(_post.getTitle());
+        post.setTopics(_post.getTopics());
+        post.setVideos(_post.getVideos());
+
+        return post;
     }
 }

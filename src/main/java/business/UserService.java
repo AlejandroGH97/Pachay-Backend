@@ -1,7 +1,7 @@
 package business;
 
 
-import entities.User;
+import data.entities.User;
 import repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

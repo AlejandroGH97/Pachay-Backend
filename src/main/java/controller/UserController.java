@@ -4,14 +4,13 @@ package controller;
 import business.UserService;
 import controller.config.jwtApi.MyUserDetailsService;
 import controller.config.util.JwtTokenUtil;
-import entities.User;
+import data.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import repository.UserRepository;
 
 import java.util.HashMap;
 import java.util.List;

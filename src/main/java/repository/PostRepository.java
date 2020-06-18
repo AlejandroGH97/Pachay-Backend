@@ -1,7 +1,7 @@
 package repository;
 
-import entities.Post;
-import entities.Topic;
+import data.entities.Post;
+import data.entities.Topic;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

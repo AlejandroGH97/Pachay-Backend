@@ -1,16 +1,14 @@
 package controller;
 
 import business.PostService;
-import entities.Post;
+import data.DTO.PostDTO;
+import data.entities.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -26,10 +24,12 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<?> newPost(@RequestBody Post post){
+    public ResponseEntity<?> newPost(@RequestBody PostDTO post){
+        post.setDate(LocalDate.now());
 
+        Post _post = postService.create(post);
 
-        postService.save(post);
+        postService.save(_post);
 
         return new ResponseEntity<>("Post created.", HttpStatus.OK);
     }
