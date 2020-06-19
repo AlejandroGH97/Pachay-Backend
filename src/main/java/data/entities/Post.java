@@ -27,16 +27,16 @@ public class Post {
     public User author;
 
     @DBRef
-    public List<Topic> topics;
+    public Topic topic;
 
     public List<String> videos;
 
-    public List<Topic> getTopics() {
-        return topics;
+    public Topic getTopic() {
+        return topic;
     }
 
-    public void setTopics(List<Topic> topics) {
-        this.topics = topics;
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 
     public List<String> getVideos() {
@@ -50,12 +50,16 @@ public class Post {
     public Post() {
     }
 
-    public Post(String postId, String title, String description, int rating, int ratingCount) {
+    public Post(String postId, String title, String description, int rating, LocalDate date, int ratingCount, User author, Topic topic, List<String> videos) {
         this.postId = postId;
         this.title = title;
         this.description = description;
         this.rating = rating;
+        this.date = date;
         this.ratingCount = ratingCount;
+        this.author = author;
+        this.topic = topic;
+        this.videos = videos;
     }
 
     public LocalDate getDate() {
@@ -113,4 +117,5 @@ public class Post {
     public void setRatingCount(int ratingCount) {
         this.ratingCount = ratingCount;
     }
+
 }

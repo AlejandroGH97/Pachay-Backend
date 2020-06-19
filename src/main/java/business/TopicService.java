@@ -21,7 +21,7 @@ public class TopicService {
         return topicRepository.save(topic);
     }
 
-    public Topic findBytopic(String topic){
+    public Topic findByTopic(String topic){
         return topicRepository.findByTopic(topic);
     }
 }

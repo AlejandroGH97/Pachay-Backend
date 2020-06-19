@@ -16,6 +16,9 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired
+    private TopicService topicService;
+
     public List<Post> findAll(){
         List<Post> response = postRepository.findAll();
         for(Post post: response){
@@ -28,8 +31,8 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public List<Post> findByTopicsTopic(Topic topic){
-        return postRepository.findByTopicsTopic(topic);
+    public List<Post> findByTopic(Topic topic){
+        return postRepository.findByTopic(topic);
     }
 
     public Post create(PostDTO _post){
@@ -41,7 +44,7 @@ public class PostService {
         post.setRating(0);
         post.setRatingCount(0);
         post.setTitle(_post.getTitle());
-        post.setTopics(_post.getTopics());
+        post.setTopic(topicService.findByTopic(_post.getTopic()));
         post.setVideos(_post.getVideos());
 
         return post;

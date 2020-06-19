@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface PostRepository extends MongoRepository<Post, String> {
 
-    public List<Post> findByTopicsTopic(Topic topic);
+    public List<Post> findByTopic(Topic topic);
 }

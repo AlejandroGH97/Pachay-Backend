@@ -56,7 +56,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 userDetails = this.myUserDetailsService.loadUserByUsername(email);
             }
             catch (UsernameNotFoundException e){
-                throw new UsernameNotFoundException("Email doesnt exist.");
+                throw new UsernameNotFoundException("Email doesn't exist.");
             }
             if (jwtTokenUtil.isValid(jwtToken,userDetails)){
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken

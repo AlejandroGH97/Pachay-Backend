@@ -26,21 +26,21 @@ public class PostDTO implements Serializable {
 
     public User author;
 
-    public List<Topic> topics;
+    public String topic;
 
     public List<String> videos;
 
     public PostDTO() {
     }
 
-    public PostDTO(String postId, String title, String description, int rating, LocalDate date, int ratingCount, List<Topic> topics, List<String> videos) {
+    public PostDTO(String postId, String title, String description, int rating, LocalDate date, int ratingCount, String topic, List<String> videos) {
         this.postId = postId;
         this.title = title;
         this.description = description;
         this.rating = rating;
         this.date = date;
         this.ratingCount = ratingCount;
-        this.topics = topics;
+        this.topic = topic;
         this.videos = videos;
     }
 
@@ -92,14 +92,6 @@ public class PostDTO implements Serializable {
         this.ratingCount = ratingCount;
     }
 
-    public List<Topic> getTopics() {
-        return topics;
-    }
-
-    public void setTopics(List<Topic> topics) {
-        this.topics = topics;
-    }
-
     public List<String> getVideos() {
         return videos;
     }
@@ -114,5 +106,13 @@ public class PostDTO implements Serializable {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 }

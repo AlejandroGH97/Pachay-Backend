@@ -1,10 +1,12 @@
 package controller;
 
 import business.PostService;
+import business.TopicService;
 import business.UserService;
 import controller.config.util.JwtTokenUtil;
 import data.DTO.PostDTO;
 import data.entities.Post;
+import data.entities.Topic;
 import data.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
