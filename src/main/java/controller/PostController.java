@@ -51,4 +51,9 @@ public class PostController {
 
         return new ResponseEntity<>("Post created.", HttpStatus.OK);
     }
+
+    @GetMapping("/topic")
+    public List<Post> getPostByTopic(@RequestBody Topic topic){
+        return postService.findByTopic(topic.topic);
+    }
 }

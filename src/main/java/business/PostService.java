@@ -34,8 +34,16 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public List<Post> findByTopic(Topic topic){
-        return postRepository.findByTopic(topic);
+    public List<Post> findByTopic(String topic){
+
+        Topic _topic = topicService.findByTopic(topic);
+
+        List<Post> response = postRepository.findByTopic(_topic);
+
+        for(Post post: response){
+            post.author.password = null;
+        }
+        return response;
     }
 
     public Post create(PostDTO _post){
