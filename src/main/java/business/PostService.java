@@ -5,6 +5,7 @@ import data.DTO.PostDTO;
 import data.entities.Post;
 import data.entities.Subtopic;
 import data.entities.Topic;
+import data.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.PostRepository;
@@ -22,6 +23,9 @@ public class PostService {
 
     @Autowired
     private SubtopicService subtopicService;
+
+    @Autowired
+    private UserService userService;
 
     public List<Post> findAll(){
         List<Post> response = postRepository.findAll();
@@ -52,6 +56,16 @@ public class PostService {
         Subtopic _subtopic = subtopicService.findBySubtopic(subtopic);
 
         List<Post> response = postRepository.findBySubtopic(_subtopic);
+
+        for(Post post: response){
+            post.author.password = null;
+        }
+        return response;
+    }
+
+    public List<Post> findByAuthor(User author){
+
+        List<Post> response = postRepository.findByAuthor(author);
 
         for(Post post: response){
             post.author.password = null;
