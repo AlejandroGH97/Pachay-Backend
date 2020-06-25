@@ -6,6 +6,7 @@ import business.UserService;
 import controller.config.util.JwtTokenUtil;
 import data.DTO.PostDTO;
 import data.entities.Post;
+import data.entities.Subtopic;
 import data.entities.Topic;
 import data.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,11 @@ public class PostController {
 
     @GetMapping("/topic")
     public List<Post> getPostByTopic(@RequestBody Topic topic){
-        return postService.findByTopic(topic.topic);
+        return postService.findByTopic(topic.getTopic());
+    }
+
+    @GetMapping("/topic/subtopic")
+    public List<Post> getPostByTopic(@RequestBody Subtopic subtopic){
+        return postService.findBySubtopic(subtopic.getSubtopic());
     }
 }

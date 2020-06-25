@@ -3,6 +3,7 @@ package business;
 
 import data.DTO.PostDTO;
 import data.entities.Post;
+import data.entities.Subtopic;
 import data.entities.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,18 @@ public class PostService {
         Topic _topic = topicService.findByTopic(topic);
 
         List<Post> response = postRepository.findByTopic(_topic);
+
+        for(Post post: response){
+            post.author.password = null;
+        }
+        return response;
+    }
+
+    public List<Post> findBySubtopic(String subtopic){
+
+        Subtopic _subtopic = subtopicService.findBySubtopic(subtopic);
+
+        List<Post> response = postRepository.findBySubtopic(_subtopic);
 
         for(Post post: response){
             post.author.password = null;
