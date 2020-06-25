@@ -29,28 +29,15 @@ public class Post {
     @DBRef
     public Topic topic;
 
+    @DBRef
+    public Subtopic subtopic;
+
     public List<String> videos;
-
-    public Topic getTopic() {
-        return topic;
-    }
-
-    public void setTopic(Topic topic) {
-        this.topic = topic;
-    }
-
-    public List<String> getVideos() {
-        return videos;
-    }
-
-    public void setVideos(List<String> videos) {
-        this.videos = videos;
-    }
 
     public Post() {
     }
 
-    public Post(String postId, String title, String description, int rating, LocalDate date, int ratingCount, User author, Topic topic, List<String> videos) {
+    public Post(String postId, String title, String description, int rating, LocalDate date, int ratingCount, User author, Topic topic, Subtopic subtopic, List<String> videos) {
         this.postId = postId;
         this.title = title;
         this.description = description;
@@ -59,6 +46,7 @@ public class Post {
         this.ratingCount = ratingCount;
         this.author = author;
         this.topic = topic;
+        this.subtopic = subtopic;
         this.videos = videos;
     }
 
@@ -116,6 +104,30 @@ public class Post {
 
     public void setRatingCount(int ratingCount) {
         this.ratingCount = ratingCount;
+    }
+
+    public Subtopic getSubtopic() {
+        return subtopic;
+    }
+
+    public void setSubtopic(Subtopic subtopic) {
+        this.subtopic = subtopic;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+
+    public List<String> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(List<String> videos) {
+        this.videos = videos;
     }
 
 }

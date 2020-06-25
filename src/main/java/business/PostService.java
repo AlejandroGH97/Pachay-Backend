@@ -19,6 +19,9 @@ public class PostService {
     @Autowired
     private TopicService topicService;
 
+    @Autowired
+    private SubtopicService subtopicService;
+
     public List<Post> findAll(){
         List<Post> response = postRepository.findAll();
         for(Post post: response){
@@ -45,6 +48,7 @@ public class PostService {
         post.setRatingCount(0);
         post.setTitle(_post.getTitle());
         post.setTopic(topicService.findByTopic(_post.getTopic()));
+        post.setSubtopic(subtopicService.findBySubtopic(_post.getSubtopic()));
         post.setVideos(_post.getVideos());
 
         return post;
