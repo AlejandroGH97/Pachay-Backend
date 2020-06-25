@@ -71,4 +71,22 @@ public class PostController {
 
         return postService.findByAuthor(author);
     }
+
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<?> deletePost(@RequestHeader(name = "Authorization") String jwt, @PathVariable String postId){
+        String jwt_token = jwt.substring(7);
+
+        String author = jwtTokenUtil.extractUsername(jwt_token);
+
+        try {
+            if(postService.delete(postId, author)){
+                return new ResponseEntity<>("Post deleted.",HttpStatus.OK);
+            }
+            return new ResponseEntity<>("Invalid request.",HttpStatus.BAD_REQUEST);
+        }
+        catch (NullPointerException e){
+            return new ResponseEntity<>("Post doesn't exist.",HttpStatus.BAD_REQUEST);
+        }
+
+    }
 }

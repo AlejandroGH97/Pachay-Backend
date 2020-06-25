@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import repository.PostRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -33,6 +34,10 @@ public class PostService {
             post.author.password = null;
         }
         return response;
+    }
+
+    public Post findOne(String postid){
+        return postRepository.findByPostId(postid);
     }
 
     public Post save(Post post){
@@ -87,5 +92,18 @@ public class PostService {
         post.setVideos(_post.getVideos());
 
         return post;
+    }
+
+    public Boolean delete(String postId, String author){
+
+        Post _post = findOne(postId);
+
+        if(_post.getAuthor().getEmail().equals(author)){
+            postRepository.deleteByPostId(_post.getPostId());
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
