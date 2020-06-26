@@ -58,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/usuarios").permitAll()
                 .antMatchers(HttpMethod.GET,"/post").permitAll()
                 .antMatchers(HttpMethod.POST,"/post/topic").permitAll()
-                .antMatchers(HttpMethod.POST,"/post/topic/subtpoic").permitAll()
+                .antMatchers(HttpMethod.POST,"/post/topic/subtopic").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
