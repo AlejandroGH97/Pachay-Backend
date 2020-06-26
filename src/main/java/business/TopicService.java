@@ -18,6 +18,7 @@ public class TopicService {
     }
 
     public Topic save(Topic topic){
+        if(topic.getTopic() == null) return null;
         return topicRepository.save(topic);
     }
 

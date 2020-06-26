@@ -19,6 +19,7 @@ public class SubtopicService {
     }
 
     public Subtopic save(Subtopic subtopic){
+        if(subtopic.getSubtopic() == null) return null;
         return subtopicRepository.save(subtopic);
     }
 

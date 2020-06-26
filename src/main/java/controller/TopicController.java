@@ -25,11 +25,16 @@ public class TopicController {
     @PostMapping
     public ResponseEntity<?> newTopic(@RequestBody Topic topic){
         try{
-            topicService.save(topic);
+            if(topicService.save(topic) == null){
+                return new ResponseEntity<>("Invalid topic.", HttpStatus.BAD_REQUEST);
+            }
             return new ResponseEntity<>("Topic created.", HttpStatus.OK);
         }
         catch (DuplicateKeyException e){
             return new ResponseEntity<>("Duplicate topic.", HttpStatus.BAD_REQUEST);
+        }
+        catch (NullPointerException e){
+            return new ResponseEntity<>("Invalid topic.", HttpStatus.BAD_REQUEST);
         }
 
     }

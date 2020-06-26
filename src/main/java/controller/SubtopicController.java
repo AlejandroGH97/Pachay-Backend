@@ -26,11 +26,16 @@ public class SubtopicController {
     @PostMapping
     public ResponseEntity<?> newSubtopic(@RequestBody Subtopic subtopic){
         try{
-            subtopicService.save(subtopic);
+            if(subtopicService.save(subtopic) == null){
+                return new ResponseEntity<>("Invalid subtopic.", HttpStatus.BAD_REQUEST);
+            }
             return new ResponseEntity<>("Subtopic created.", HttpStatus.OK);
         }
         catch (DuplicateKeyException e){
             return new ResponseEntity<>("Duplicate subtopic.", HttpStatus.BAD_REQUEST);
+        }
+        catch (NullPointerException e){
+            return new ResponseEntity<>("Invalid subtopic.", HttpStatus.BAD_REQUEST);
         }
 
     }
