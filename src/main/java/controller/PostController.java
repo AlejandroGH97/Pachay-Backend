@@ -53,6 +53,8 @@ public class PostController {
 
         post.setAuthor(author);
 
+
+
         post.setDate(new java.util.Date());
 
         Post _post = postService.create(post);
@@ -73,7 +75,6 @@ public class PostController {
         return response;
 
     }
-
     @PostMapping("/topic/subtopic")
     public List<Post> getPostByTopic(@RequestBody Subtopic subtopic){
         List<Post> response = postService.findBySubtopic(subtopic.getSubtopic());
