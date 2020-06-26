@@ -9,12 +9,15 @@ import data.entities.Post;
 import data.entities.Subtopic;
 import data.entities.Topic;
 import data.entities.User;
+import org.omg.PortableServer.POA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -32,7 +35,13 @@ public class PostController {
 
     @GetMapping
     public List<Post> readAll(){
-        return postService.findAll();
+        List<Post> response = postService.findAll();
+        response.sort((o1, o2) -> {
+            if( o1.getDate().before(o2.getDate())) return 1;
+            if( o1.getDate().after(o2.getDate())) return -1;
+            return 0;
+        });
+        return response;
     }
 
     @PostMapping
@@ -44,7 +53,7 @@ public class PostController {
 
         post.setAuthor(author);
 
-        post.setDate(LocalDate.now());
+        post.setDate(new java.util.Date());
 
         Post _post = postService.create(post);
 
@@ -53,14 +62,27 @@ public class PostController {
         return new ResponseEntity<>("Post created.", HttpStatus.OK);
     }
 
-    @GetMapping("/topic")
+    @PostMapping("/topic")
     public List<Post> getPostByTopic(@RequestBody Topic topic){
-        return postService.findByTopic(topic.getTopic());
+        List<Post> response = postService.findByTopic(topic.getTopic());
+        response.sort((o1, o2) -> {
+            if( o1.getDate().before(o2.getDate())) return 1;
+            if( o1.getDate().after(o2.getDate())) return -1;
+            return 0;
+        });
+        return response;
+
     }
 
-    @GetMapping("/topic/subtopic")
+    @PostMapping("/topic/subtopic")
     public List<Post> getPostByTopic(@RequestBody Subtopic subtopic){
-        return postService.findBySubtopic(subtopic.getSubtopic());
+        List<Post> response = postService.findBySubtopic(subtopic.getSubtopic());
+        response.sort((o1, o2) -> {
+            if( o1.getDate().before(o2.getDate())) return 1;
+            if( o1.getDate().after(o2.getDate())) return -1;
+            return 0;
+        });
+        return response;
     }
 
     @GetMapping("/author")

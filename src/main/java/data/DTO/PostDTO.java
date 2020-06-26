@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class PostDTO implements Serializable {
@@ -20,7 +21,7 @@ public class PostDTO implements Serializable {
 
     public int rating = 0;
 
-    public LocalDate date;
+    public Date date;
 
     private int ratingCount = 0;
 
@@ -35,7 +36,7 @@ public class PostDTO implements Serializable {
     public PostDTO() {
     }
 
-    public PostDTO(String postId, String title, String description, int rating, LocalDate date, int ratingCount, String topic, String subtopic, List<String> videos) {
+    public PostDTO(String postId, String title, String description, int rating, Date date, int ratingCount, String topic, String subtopic, List<String> videos) {
         this.postId = postId;
         this.title = title;
         this.description = description;
@@ -79,11 +80,11 @@ public class PostDTO implements Serializable {
         this.rating = rating;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

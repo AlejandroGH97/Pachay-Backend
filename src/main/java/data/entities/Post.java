@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Document(collection = "posts")
@@ -19,7 +20,7 @@ public class Post {
 
     public int rating = 0;
 
-    public LocalDate date;
+    public Date date;
 
     private int ratingCount = 0;
 
@@ -37,7 +38,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(String postId, String title, String description, int rating, LocalDate date, int ratingCount, User author, Topic topic, Subtopic subtopic, List<String> videos) {
+    public Post(String postId, String title, String description, int rating, Date date, int ratingCount, User author, Topic topic, Subtopic subtopic, List<String> videos) {
         this.postId = postId;
         this.title = title;
         this.description = description;
@@ -50,11 +51,11 @@ public class Post {
         this.videos = videos;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
