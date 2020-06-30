@@ -1,6 +1,7 @@
 package controller;
 
 import business.SubtopicService;
+import data.DTO.SubtopicDTO;
 import data.entities.Subtopic;
 import data.entities.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,12 @@ public class SubtopicController {
     }
 
     @PostMapping
-    public ResponseEntity<?> newSubtopic(@RequestBody Subtopic subtopic){
+    public ResponseEntity<?> newSubtopic(@RequestBody SubtopicDTO subtopic){
+
+        Subtopic _subtopic = subtopicService.create(subtopic);
+
         try{
-            if(subtopicService.save(subtopic) == null){
+            if(subtopicService.save(_subtopic) == null){
                 return new ResponseEntity<>("Invalid subtopic.", HttpStatus.BAD_REQUEST);
             }
             return new ResponseEntity<>("Subtopic created.", HttpStatus.OK);
@@ -38,5 +42,10 @@ public class SubtopicController {
             return new ResponseEntity<>("Invalid subtopic.", HttpStatus.BAD_REQUEST);
         }
 
+    }
+
+    @PostMapping("/topic")
+    public List<Subtopic> filterByTopic(@RequestBody Topic topic){
+        return subtopicService.findByTopic(topic.getTopic());
     }
 }
