@@ -53,8 +53,6 @@ public class PostController {
 
         post.setAuthor(author);
 
-
-
         post.setDate(new java.util.Date());
 
         Post _post = postService.create(post);
@@ -110,6 +108,45 @@ public class PostController {
         catch (NullPointerException e){
             return new ResponseEntity<>("Post doesn't exist.",HttpStatus.BAD_REQUEST);
         }
+    }
 
+    @PostMapping("/like/{postId}")
+    public ResponseEntity<?> likePost(@RequestHeader(name = "Authorization") String jwt, @PathVariable String postId){
+        String jwt_token = jwt.substring(7);
+
+        String user = jwtTokenUtil.extractUsername(jwt_token);
+
+        try{
+            if(postService.like(postId, user)){
+                return new ResponseEntity<>("Post liked",HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity<>("Like removed.",HttpStatus.OK);
+            }
+
+        }
+        catch (NullPointerException e){
+            return new ResponseEntity<>("Invalid request.",HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/dislike/{postId}")
+    public ResponseEntity<?> dislikePost(@RequestHeader(name = "Authorization") String jwt, @PathVariable String postId){
+        String jwt_token = jwt.substring(7);
+
+        String user = jwtTokenUtil.extractUsername(jwt_token);
+
+        try{
+            if(postService.dislike(postId, user)){
+                return new ResponseEntity<>("Post disliked",HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity<>("Dislike removed.",HttpStatus.OK);
+            }
+
+        }
+        catch (NullPointerException e){
+            return new ResponseEntity<>("Invalid request.",HttpStatus.BAD_REQUEST);
+        }
     }
 }

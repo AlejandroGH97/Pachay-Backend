@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Document(collection = "posts")
@@ -22,8 +23,6 @@ public class Post {
 
     public Date date;
 
-    private int ratingCount = 0;
-
     @DBRef
     public User author;
 
@@ -35,16 +34,17 @@ public class Post {
 
     public List<String> videos;
 
+    public HashMap<String, Integer> likes = new HashMap<>();
+
     public Post() {
     }
 
-    public Post(String postId, String title, String description, int rating, Date date, int ratingCount, User author, Topic topic, Subtopic subtopic, List<String> videos) {
+    public Post(String postId, String title, String description, int rating, Date date, User author, Topic topic, Subtopic subtopic, List<String> videos) {
         this.postId = postId;
         this.title = title;
         this.description = description;
         this.rating = rating;
         this.date = date;
-        this.ratingCount = ratingCount;
         this.author = author;
         this.topic = topic;
         this.subtopic = subtopic;
@@ -99,14 +99,6 @@ public class Post {
         this.rating = rating;
     }
 
-    public int getRatingCount() {
-        return ratingCount;
-    }
-
-    public void setRatingCount(int ratingCount) {
-        this.ratingCount = ratingCount;
-    }
-
     public Subtopic getSubtopic() {
         return subtopic;
     }
@@ -129,6 +121,66 @@ public class Post {
 
     public void setVideos(List<String> videos) {
         this.videos = videos;
+    }
+
+    public HashMap<String, Integer> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(HashMap<String, Integer> likes) {
+        this.likes = likes;
+    }
+
+    public Boolean like(String userId){
+        if(likes.containsKey(userId)){
+            if(likes.get(userId).equals(-1)){
+                likes.replace(userId,1);
+                setRating(getRating()+2);
+                return true;
+            }
+            else if(likes.get(userId).equals(0)){
+                likes.replace(userId,1);
+                setRating(getRating()+1);
+                return true;
+            }
+            else if(likes.get(userId).equals(1)){
+                likes.replace(userId,0);
+                setRating(getRating()-1);
+                return false;
+            }
+        }
+        else{
+            likes.put(userId,1);
+            setRating(getRating()+1);
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean dislike(String userId){
+        if(likes.containsKey(userId)){
+            if(likes.get(userId).equals(1)){
+                likes.replace(userId,-1);
+                setRating(getRating()-2);
+                return true;
+            }
+            else if(likes.get(userId).equals(0)){
+                likes.replace(userId,-1);
+                setRating(getRating()-1);
+                return true;
+            }
+            else if(likes.get(userId).equals(-1)){
+                likes.replace(userId,0);
+                setRating(getRating()+1);
+                return false;
+            }
+        }
+        else{
+            likes.put(userId,-1);
+            setRating(getRating()-1);
+            return true;
+        }
+        return false;
     }
 
 }

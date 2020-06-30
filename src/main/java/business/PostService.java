@@ -85,7 +85,6 @@ public class PostService {
         post.setDate(_post.getDate());
         post.setDescription(_post.getDescription());
         post.setRating(0);
-        post.setRatingCount(0);
         post.setTitle(_post.getTitle());
         post.setTopic(topicService.findByTopic(_post.getTopic()));
         post.setSubtopic(subtopicService.findBySubtopic(_post.getSubtopic()));
@@ -105,5 +104,21 @@ public class PostService {
         else{
             return false;
         }
+    }
+
+    public Boolean like(String postId, String userEmail){
+        Post post = findOne(postId);
+        User _user = userService.findByEmail(userEmail);
+        Boolean success = post.like(_user.getId());
+        postRepository.save(post);
+        return success;
+    }
+
+    public Boolean dislike(String postId, String userEmail){
+        Post post = findOne(postId);
+        User _user = userService.findByEmail(userEmail);
+        Boolean success = post.dislike(_user.getId());
+        postRepository.save(post);
+        return success;
     }
 }
