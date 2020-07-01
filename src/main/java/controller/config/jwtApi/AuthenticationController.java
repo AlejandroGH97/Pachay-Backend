@@ -46,6 +46,7 @@ public class AuthenticationController {
         if(_user.password.equals(user.password)){
             final String jwt = jwtTokenUtil.createJwt(userDetails);
             HashMap<String,String> response = new HashMap<>();
+            response.put("userId",_user.getId());
             response.put("jwt",jwt);
             response.put("firstName",_user.firstName);
             response.put("lastName",_user.lastName);
