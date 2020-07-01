@@ -117,12 +117,8 @@ public class PostController {
         String user = jwtTokenUtil.extractUsername(jwt_token);
 
         try{
-            if(postService.like(postId, user)){
-                return new ResponseEntity<>("Post liked",HttpStatus.OK);
-            }
-            else{
-                return new ResponseEntity<>("Like removed.",HttpStatus.OK);
-            }
+            Integer newRating = postService.like(postId, user);
+                return new ResponseEntity<>("{\"rating\":\"".concat(Integer.toString(newRating)).concat("\"}"),HttpStatus.OK);
 
         }
         catch (NullPointerException e){
@@ -137,12 +133,8 @@ public class PostController {
         String user = jwtTokenUtil.extractUsername(jwt_token);
 
         try{
-            if(postService.dislike(postId, user)){
-                return new ResponseEntity<>("Post disliked",HttpStatus.OK);
-            }
-            else{
-                return new ResponseEntity<>("Dislike removed.",HttpStatus.OK);
-            }
+            Integer newRating = postService.dislike(postId, user);
+            return new ResponseEntity<>("{\"rating\":\"".concat(Integer.toString(newRating)).concat("\"}"),HttpStatus.OK);
 
         }
         catch (NullPointerException e){

@@ -106,19 +106,19 @@ public class PostService {
         }
     }
 
-    public Boolean like(String postId, String userEmail){
+    public Integer like(String postId, String userEmail){
         Post post = findOne(postId);
         User _user = userService.findByEmail(userEmail);
-        Boolean success = post.like(_user.getId());
+        post.like(_user.getId());
         postRepository.save(post);
-        return success;
+        return post.getRating();
     }
 
-    public Boolean dislike(String postId, String userEmail){
+    public Integer dislike(String postId, String userEmail){
         Post post = findOne(postId);
         User _user = userService.findByEmail(userEmail);
-        Boolean success = post.dislike(_user.getId());
+        post.dislike(_user.getId());
         postRepository.save(post);
-        return success;
+        return post.getRating();
     }
 }
