@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -117,8 +118,9 @@ public class PostController {
         String user = jwtTokenUtil.extractUsername(jwt_token);
 
         try{
-            Integer newRating = postService.like(postId, user);
-                return new ResponseEntity<>("{\"rating\":\"".concat(Integer.toString(newRating)).concat("\"}"),HttpStatus.OK);
+            HashMap<String,Integer> response = new HashMap<>();
+            response.put("rating", postService.like(postId, user));
+            return new ResponseEntity<>(response,HttpStatus.OK);
 
         }
         catch (NullPointerException e){
@@ -133,8 +135,9 @@ public class PostController {
         String user = jwtTokenUtil.extractUsername(jwt_token);
 
         try{
-            Integer newRating = postService.dislike(postId, user);
-            return new ResponseEntity<>("{\"rating\":\"".concat(Integer.toString(newRating)).concat("\"}"),HttpStatus.OK);
+            HashMap<String,Integer> response = new HashMap<>();
+            response.put("rating", postService.dislike(postId, user));
+            return new ResponseEntity<>(response,HttpStatus.OK);
 
         }
         catch (NullPointerException e){
