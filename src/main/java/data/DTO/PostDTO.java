@@ -33,16 +33,16 @@ public class PostDTO implements Serializable {
 
     public List<String> videos;
 
-    public String ejercicios;
+    public List<String> ejercicios;
 
-    public String solucionario;
+    public List<String> solucionario;
 
-    public String soporte;
+    public List<String> soporte;
 
     public PostDTO() {
     }
 
-    public PostDTO(String postId, String title, String description, int rating, Date date, int ratingCount, User author, String topic, String subtopic, List<String> videos, String ejercicios, String solucionario, String soporte) {
+    public PostDTO(String postId, String title, String description, int rating, Date date, int ratingCount, User author, String topic, String subtopic, List<String> videos, List<String> ejercicios, List<String> solucionario, List<String> soporte) {
         this.postId = postId;
         this.title = title;
         this.description = description;
@@ -138,27 +138,27 @@ public class PostDTO implements Serializable {
         this.subtopic = subtopic;
     }
 
-    public String getEjercicios() {
+    public List<String> getEjercicios() {
         return ejercicios;
     }
 
-    public void setEjercicios(String ejercicios) {
+    public void setEjercicios(List<String> ejercicios) {
         this.ejercicios = ejercicios;
     }
 
-    public String getSolucionario() {
+    public List<String> getSolucionario() {
         return solucionario;
     }
 
-    public void setSolucionario(String solucionario) {
+    public void setSolucionario(List<String> solucionario) {
         this.solucionario = solucionario;
     }
 
-    public String getSoporte() {
+    public List<String> getSoporte() {
         return soporte;
     }
 
-    public void setSoporte(String soporte) {
+    public void setSoporte(List<String> soporte) {
         this.soporte = soporte;
     }
 }
