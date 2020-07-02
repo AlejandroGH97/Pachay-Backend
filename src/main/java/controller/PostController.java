@@ -1,7 +1,6 @@
 package controller;
 
 import business.PostService;
-import business.TopicService;
 import business.UserService;
 import controller.config.util.JwtTokenUtil;
 import data.DTO.PostDTO;
@@ -9,15 +8,11 @@ import data.entities.Post;
 import data.entities.Subtopic;
 import data.entities.Topic;
 import data.entities.User;
-import org.omg.PortableServer.POA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
