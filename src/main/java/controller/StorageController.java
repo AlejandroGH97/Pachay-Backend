@@ -39,17 +39,32 @@ public class StorageController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<?> upload(@RequestBody Map<String,List<String>> files){
+    public ResponseEntity<?> upload(@RequestBody Map<String, ArrayList<String>> files){
 
         ArrayList<String> ejerciciosPath = new ArrayList<>();
         ArrayList<String> solucionarioPath = new ArrayList<>();
         ArrayList<String> soportePath = new ArrayList<>();
 
-        if(files.containsKey("ejercicios")) ejerciciosPath = storageService.uploadFile(files.get("ejercicios").get(0));
-        if(files.containsKey("solucionario"))  solucionarioPath = storageService.uploadFile(files.get("solucionario").get(0));
-        if(files.containsKey("soporte"))  soportePath = storageService.uploadFile(files.get("soporte").get(0));
+        if(files.containsKey("ejercicios") && files.get("ejercicios").size() > 0){
+            ejerciciosPath = storageService.uploadFile(files.get("ejercicios").get(0));
+        }
+        else{
+            ejerciciosPath.add("-1");
+        }
+        if(files.containsKey("solucionario") && files.get("solucionario").size() > 0) {
+            solucionarioPath = storageService.uploadFile(files.get("solucionario").get(0));
+        }
+        else{
+            solucionarioPath.add("-1");
+        }
+        if(files.containsKey("soporte") && files.get("soporte").size() > 0){
+            soportePath = storageService.uploadFile(files.get("soporte").get(0));
+        }
+        else{
+            soportePath.add("-1");
+        }
 
-        HashMap<String,List<String>> response = new HashMap<>();
+        HashMap<String,ArrayList<String>> response = new HashMap<>();
 
         if(!ejerciciosPath.get(0).equals("-1")) response.put("ejercicios",ejerciciosPath);
         if(!solucionarioPath.get(0).equals("-1")) response.put("solucionario",solucionarioPath);
