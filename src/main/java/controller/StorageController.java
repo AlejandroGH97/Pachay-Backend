@@ -27,7 +27,7 @@ public class StorageController {
         try {
             return ResponseEntity.ok()
                     .contentLength(file.contentLength())
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .contentType(MediaType.APPLICATION_PDF)
                     .body(file);
 
         }
