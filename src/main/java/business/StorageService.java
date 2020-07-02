@@ -1,12 +1,18 @@
 package business;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resources;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Base64;
@@ -32,5 +38,18 @@ public class StorageService {
             System.out.println("Couldn't save file.");
             return "-1";
         }
+    }
+
+    public Resource downloadFile(String filename){
+        String fullpath = path.concat(filename);
+        Path path = Paths.get(fullpath);
+        Resource file = null;
+        try {
+            file = new UrlResource(path.toUri());
+        }
+        catch (MalformedURLException e){
+            e.printStackTrace();
+        }
+        return file;
     }
 }
