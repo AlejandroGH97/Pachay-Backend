@@ -36,10 +36,16 @@ public class Post {
 
     public HashMap<String, Integer> likes = new HashMap<>();
 
+    public String ejercicios;
+
+    public String solucionario;
+
+    public String soporte;
+
     public Post() {
     }
 
-    public Post(String postId, String title, String description, int rating, Date date, User author, Topic topic, Subtopic subtopic, List<String> videos) {
+    public Post(String postId, String title, String description, int rating, Date date, User author, Topic topic, Subtopic subtopic, List<String> videos, String ejercicios, String solucionario, String soporte) {
         this.postId = postId;
         this.title = title;
         this.description = description;
@@ -49,6 +55,9 @@ public class Post {
         this.topic = topic;
         this.subtopic = subtopic;
         this.videos = videos;
+        this.ejercicios = ejercicios;
+        this.solucionario = solucionario;
+        this.soporte = soporte;
     }
 
     public Date getDate() {
@@ -129,6 +138,30 @@ public class Post {
 
     public void setLikes(HashMap<String, Integer> likes) {
         this.likes = likes;
+    }
+
+    public String getEjercicios() {
+        return ejercicios;
+    }
+
+    public void setEjercicios(String ejercicios) {
+        this.ejercicios = ejercicios;
+    }
+
+    public String getSolucionario() {
+        return solucionario;
+    }
+
+    public void setSolucionario(String solucionario) {
+        this.solucionario = solucionario;
+    }
+
+    public String getSoporte() {
+        return soporte;
+    }
+
+    public void setSoporte(String soporte) {
+        this.soporte = soporte;
     }
 
     public Boolean like(String userId){

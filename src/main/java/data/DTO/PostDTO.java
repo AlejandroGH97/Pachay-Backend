@@ -33,19 +33,29 @@ public class PostDTO implements Serializable {
 
     public List<String> videos;
 
+    public String ejercicios;
+
+    public String solucionario;
+
+    public String soporte;
+
     public PostDTO() {
     }
 
-    public PostDTO(String postId, String title, String description, int rating, Date date, int ratingCount, String topic, String subtopic, List<String> videos) {
+    public PostDTO(String postId, String title, String description, int rating, Date date, int ratingCount, User author, String topic, String subtopic, List<String> videos, String ejercicios, String solucionario, String soporte) {
         this.postId = postId;
         this.title = title;
         this.description = description;
         this.rating = rating;
         this.date = date;
         this.ratingCount = ratingCount;
+        this.author = author;
         this.topic = topic;
         this.subtopic = subtopic;
         this.videos = videos;
+        this.ejercicios = ejercicios;
+        this.solucionario = solucionario;
+        this.soporte = soporte;
     }
 
     public String getPostId() {
@@ -126,5 +136,29 @@ public class PostDTO implements Serializable {
 
     public void setSubtopic(String subtopic) {
         this.subtopic = subtopic;
+    }
+
+    public String getEjercicios() {
+        return ejercicios;
+    }
+
+    public void setEjercicios(String ejercicios) {
+        this.ejercicios = ejercicios;
+    }
+
+    public String getSolucionario() {
+        return solucionario;
+    }
+
+    public void setSolucionario(String solucionario) {
+        this.solucionario = solucionario;
+    }
+
+    public String getSoporte() {
+        return soporte;
+    }
+
+    public void setSoporte(String soporte) {
+        this.soporte = soporte;
     }
 }

@@ -89,6 +89,9 @@ public class PostService {
         post.setTopic(topicService.findByTopic(_post.getTopic()));
         post.setSubtopic(subtopicService.findBySubtopic(_post.getSubtopic()));
         post.setVideos(_post.getVideos());
+        post.setEjercicios(_post.getEjercicios());
+        post.setSolucionario(_post.getSolucionario());
+        post.setSoporte(_post.getSoporte());
 
         return post;
     }
