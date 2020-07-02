@@ -28,6 +28,7 @@ public class StorageController {
             return ResponseEntity.ok()
                     .contentLength(file.contentLength())
                     .contentType(MediaType.APPLICATION_PDF)
+                    .header("Content-Disposition","attachment; filename=\"file.pdf\"")
                     .body(file);
 
         }
