@@ -3,9 +3,11 @@ package controller;
 import business.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -22,19 +24,18 @@ public class StorageController {
     private StorageService storageService;
 
     @GetMapping("/download/{filename}")
-    public ResponseEntity download(@PathVariable String filename){
+    public ResponseEntity<?> download(@PathVariable String filename){
         Resource file = storageService.downloadFile(filename);
         try {
-            return ResponseEntity.ok()
-                    .contentLength(file.contentLength())
-                    .contentType(MediaType.APPLICATION_PDF)
-                    .header("Content-Disposition","attachment; filename=\"file.pdf\"")
-                    .body(file);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentLength(file.contentLength());
+            headers.setContentDispositionFormData("attachment","file.pdf");
+            return  new ResponseEntity<>(file,headers,HttpStatus.OK);
 
         }
         catch (IOException e){
-            return ResponseEntity.badRequest()
-                    .body("Invalid request.");
+            return new ResponseEntity<>("Bad request.", HttpStatus.BAD_REQUEST);
         }
 
     }
