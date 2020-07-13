@@ -39,5 +39,19 @@ public class UserService {
         });
     }
 
+    public Boolean favorite(String postId, String email){
+        User user = repository.findByEmail(email);
+        if(user.getFavorites().contains(postId)){
+            user.getFavorites().remove(postId);
+            repository.save(user);
+            return false;
+        }
+        else{
+            user.getFavorites().add(postId);
+            repository.save(user);
+            return true;
+        }
+    }
+
 
 }

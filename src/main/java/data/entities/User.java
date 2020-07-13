@@ -7,6 +7,9 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.nio.charset.StandardCharsets;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "users")
 public class User {
@@ -26,6 +29,8 @@ public class User {
     public int role;
 
     public User() { }
+
+    public ArrayList<String> favorites = new ArrayList<>();
 
     public User(String id, String email, String firstName, String lastName, String password, int role) {
         this.id = id;
@@ -86,5 +91,13 @@ public class User {
 
     public boolean verifyPassword(String password){
         return this.password.equals(Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString());
+    }
+
+    public ArrayList<String> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(ArrayList<String> favorites) {
+        this.favorites = favorites;
     }
 }

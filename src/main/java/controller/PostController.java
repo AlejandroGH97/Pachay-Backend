@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -148,6 +147,25 @@ public class PostController {
         }
         catch (NullPointerException e){
             return new ResponseEntity<>("Invalid request.",HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/favorite/{postId}")
+    public ResponseEntity<Integer> favoritePost(@RequestHeader(name = "Authorization") String jwt, @PathVariable String postId){
+        String jwt_token = jwt.substring(7);
+
+        String email = jwtTokenUtil.extractUsername(jwt_token);
+
+        try {
+            if (userService.favorite(postId, email)) {
+                return new ResponseEntity<>(1, HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(0, HttpStatus.OK);
+            }
+        }
+        catch (NullPointerException e){
+            return new ResponseEntity<>(-1,HttpStatus.BAD_REQUEST);
         }
     }
 
