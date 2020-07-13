@@ -36,6 +36,8 @@ public class Post {
 
     public HashMap<String, Integer> likes = new HashMap<>();
 
+    public HashMap<String, Integer> favorited = new HashMap<>();
+
     public List<String> ejercicios;
 
     public List<String> solucionario;
@@ -140,6 +142,14 @@ public class Post {
         this.likes = likes;
     }
 
+    public HashMap<String, Integer> getFavorited() {
+        return favorited;
+    }
+
+    public void setFavorited(HashMap<String, Integer> favorited) {
+        this.favorited = favorited;
+    }
+
     public List<String> getEjercicios() {
         return ejercicios;
     }
@@ -214,6 +224,20 @@ public class Post {
             return true;
         }
         return false;
+    }
+
+    public void favorite(String userId){
+        if(favorited.containsKey(userId)){
+            if(favorited.get(userId).equals(1)){
+                favorited.put(userId,0);
+            }
+            else {
+                favorited.put(userId,1);
+            }
+        }
+        else{
+            favorited.put(userId,1);
+        }
     }
 
 }

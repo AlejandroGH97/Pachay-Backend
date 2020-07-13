@@ -146,4 +146,11 @@ public class PostService {
         return favorites;
 
     }
+
+    public void favorite(String postId, String email){
+        Post post = postRepository.findByPostId(postId);
+        User user = userService.findByEmail(email);
+        post.favorite(user.getId());
+        postRepository.save(post);
+    }
 }

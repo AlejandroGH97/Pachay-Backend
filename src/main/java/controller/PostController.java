@@ -157,6 +157,7 @@ public class PostController {
         String email = jwtTokenUtil.extractUsername(jwt_token);
 
         try {
+            postService.favorite(postId,email);
             if (userService.favorite(postId, email)) {
                 return new ResponseEntity<>(1, HttpStatus.OK);
             }
