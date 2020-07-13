@@ -86,7 +86,6 @@ public class PostController {
     @PostMapping("/topic/subtopic/rating")
     public List<Post> getPostByRating(@RequestBody Subtopic subtopic){
         List<Post> response = postService.findBySubtopic(subtopic.getSubtopic());
-        System.out.println(response.size());
         response.sort(Comparator.comparingInt(Post::getRating).reversed());
 
         return response;
