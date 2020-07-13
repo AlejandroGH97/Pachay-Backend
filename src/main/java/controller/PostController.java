@@ -169,5 +169,14 @@ public class PostController {
         }
     }
 
+    @GetMapping("/favorites")
+    public List<Post> getFavorites(@RequestHeader(name = "Authorization") String jwt){
+        String jwt_token = jwt.substring(7);
+
+        String email = jwtTokenUtil.extractUsername(jwt_token);
+
+        return postService.findFavorites(email);
+    }
+
 
 }

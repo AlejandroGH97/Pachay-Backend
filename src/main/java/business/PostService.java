@@ -7,11 +7,11 @@ import data.entities.Subtopic;
 import data.entities.Topic;
 import data.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import repository.PostRepository;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PostService {
@@ -32,6 +32,7 @@ public class PostService {
         List<Post> response = postRepository.findAll();
         for(Post post: response){
             post.author.password = null;
+            post.author.favorites = null;
         }
         return response;
     }
@@ -52,6 +53,7 @@ public class PostService {
 
         for(Post post: response){
             post.author.password = null;
+            post.author.favorites = null;
         }
         return response;
     }
@@ -64,6 +66,7 @@ public class PostService {
 
         for(Post post: response){
             post.author.password = null;
+            post.author.favorites = null;
         }
         return response;
     }
@@ -74,6 +77,7 @@ public class PostService {
 
         for(Post post: response){
             post.author.password = null;
+            post.author.favorites = null;
         }
         return response;
     }
@@ -123,5 +127,23 @@ public class PostService {
         post.dislike(_user.getId());
         postRepository.save(post);
         return post.getRating();
+    }
+
+    public List<Post> findFavorites(String email){
+        User user = userService.findByEmail(email);
+
+        List<Post> favorites = new ArrayList<>();
+
+        for(String postId : user.getFavorites()){
+            favorites.add(findOne(postId));
+        }
+
+        for(Post post : favorites){
+            post.getAuthor().password = null;
+            post.getAuthor().favorites = null;
+        }
+
+        return favorites;
+
     }
 }
