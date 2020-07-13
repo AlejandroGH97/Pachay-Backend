@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -69,14 +71,24 @@ public class PostController {
         return response;
 
     }
+
     @PostMapping("/topic/subtopic")
-    public List<Post> getPostByTopic(@RequestBody Subtopic subtopic){
+    public List<Post> getPostBySubtopic(@RequestBody Subtopic subtopic){
         List<Post> response = postService.findBySubtopic(subtopic.getSubtopic());
         response.sort((o1, o2) -> {
             if( o1.getDate().before(o2.getDate())) return 1;
             if( o1.getDate().after(o2.getDate())) return -1;
             return 0;
         });
+        return response;
+    }
+
+    @PostMapping("/topic/subtopic/rating")
+    public List<Post> getPostByRating(@RequestBody Subtopic subtopic){
+        List<Post> response = postService.findBySubtopic(subtopic.getSubtopic());
+        System.out.println(response.size());
+        response.sort(Comparator.comparingInt(Post::getRating).reversed());
+
         return response;
     }
 
