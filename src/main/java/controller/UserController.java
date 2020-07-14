@@ -37,11 +37,12 @@ public class UserController {
     ResponseEntity<?> newUser(@RequestBody User newUser){
 
         try{
-            service.save(newUser);
+            User user = service.save(newUser);
             UserDetails userDetails = myUserDetailsService.loadUserByUsername(newUser.email);
             String jwt = jwtTokenUtil.createJwt(userDetails);
             HashMap<String,String> response = new HashMap<>();
             response.put("jwt",jwt);
+            response.put("role",Integer.toString(user.getRole()));
 
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
