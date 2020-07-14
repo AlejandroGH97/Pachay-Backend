@@ -190,7 +190,9 @@ public class PostController {
         if(user.getRole() == 2){
             return postService.findByValidated(false);
         }
-        return null;
+        else{
+            return postService.findByValidatedAndAuthor(false,email);
+        }
     }
 
     @PostMapping("/reject/{postId}")

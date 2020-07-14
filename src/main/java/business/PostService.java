@@ -105,6 +105,18 @@ public class PostService {
         return response;
     }
 
+    public List<Post> findByValidatedAndAuthor(Boolean status, String author){
+        User user = userService.findByEmail(author);
+
+        List<Post> response = postRepository.findByValidatedAndAuthor(status,user);
+
+        for(Post post: response){
+            post.author.password = null;
+            post.author.favorites = null;
+        }
+        return response;
+    }
+
 
     public Post create(PostDTO _post){
         Post post = new Post();

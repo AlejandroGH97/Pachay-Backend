@@ -17,4 +17,6 @@ public interface PostRepository extends MongoRepository<Post, String> {
     public void deleteByPostId(String postid);
     public List<Post> findByValidated(Boolean status);
     public List<Post> findByValidatedAndSubtopic(Boolean status, Subtopic subtopic);
+    public List<Post> findByValidatedAndAuthor(Boolean status, User user);
+
 }
