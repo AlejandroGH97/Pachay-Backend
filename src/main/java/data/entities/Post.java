@@ -32,6 +32,8 @@ public class Post {
     @DBRef
     public Subtopic subtopic;
 
+    public Boolean validated = false;
+
     public List<String> videos;
 
     public HashMap<String, Integer> likes = new HashMap<>();
@@ -240,4 +242,11 @@ public class Post {
         }
     }
 
+    public Boolean getValidated() {
+        return validated;
+    }
+
+    public void setValidated(Boolean validated) {
+        this.validated = validated;
+    }
 }

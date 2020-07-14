@@ -82,6 +82,30 @@ public class PostService {
         return response;
     }
 
+    public List<Post> findByValidated(Boolean status){
+
+        List<Post> response = postRepository.findByValidated(status);
+
+        for(Post post: response){
+            post.author.password = null;
+            post.author.favorites = null;
+        }
+        return response;
+    }
+
+    public List<Post> findByValidatedAndSubtopic(Boolean status, String subtopicName){
+        Subtopic subtopic = subtopicService.findBySubtopic(subtopicName);
+
+        List<Post> response = postRepository.findByValidatedAndSubtopic(status,subtopic);
+
+        for(Post post: response){
+            post.author.password = null;
+            post.author.favorites = null;
+        }
+        return response;
+    }
+
+
     public Post create(PostDTO _post){
         Post post = new Post();
 
@@ -152,5 +176,16 @@ public class PostService {
         User user = userService.findByEmail(email);
         post.favorite(user.getId());
         postRepository.save(post);
+    }
+
+    public void validate(String postId){
+        Post post = postRepository.findByPostId(postId);
+        post.setValidated(true);
+        postRepository.save(post);
+    }
+
+    public void reject(String postId){
+        Post post = postRepository.findByPostId(postId);
+        postRepository.delete(post);
     }
 }
