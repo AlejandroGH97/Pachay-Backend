@@ -139,8 +139,9 @@ public class PostService {
     public Boolean delete(String postId, String author){
 
         Post _post = findOne(postId);
+        User user = userService.findByEmail(author);
 
-        if(_post.getAuthor().getEmail().equals(author)){
+        if(_post.getAuthor().getEmail().equals(author) || user.getRole() == 2){
             postRepository.deleteByPostId(_post.getPostId());
             return true;
         }
