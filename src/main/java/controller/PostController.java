@@ -94,9 +94,9 @@ public class PostController {
     public List<Post> getPostByAuthor(@RequestHeader(name = "Authorization") String jwt){
         String jwt_token = jwt.substring(7);
 
-        User author = userService.findByEmail(jwtTokenUtil.extractUsername(jwt_token));
+        String author = jwtTokenUtil.extractUsername(jwt_token);
 
-        return postService.findByAuthor(author);
+        return postService.findByValidatedAndAuthor(true,author);
     }
 
     @DeleteMapping("/{postId}")
